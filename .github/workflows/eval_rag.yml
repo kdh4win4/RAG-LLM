@@ -1,0 +1,23 @@
+name: RAG Quality Evaluation
+
+on: [push]
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      - name: Run RAGAS Evaluation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          # pytest를 통해 Ragas 지표(Faithfulness, Answer Relevance 등)를 검증
+          python -m pytest tests/test_eval.py
