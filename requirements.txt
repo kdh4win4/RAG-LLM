@@ -1,0 +1,7 @@
+langchain
+langchain-openai
+chromadb
+ragas
+pypdf
+python-dotenv
+pytest
